@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mail Automation | Recruiter Outreach</title>
+
+    <style>
+
+        /* =========================================================
+           GLOBAL
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #4f46e5;
+
+            --background: #f4f7fb;
+            --card: #ffffff;
+
+            --text: #111827;
+            --text-secondary: #374151;
+            --muted: #6b7280;
+
+            --border: #e5e7eb;
+
+            --success: #15803d;
+            --success-bg: #f0fdf4;
+            --success-border: #bbf7d0;
+
+            --danger: #dc2626;
+            --danger-bg: #fef2f2;
+            --danger-border: #fecaca;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(99, 102, 241, 0.10),
+                    transparent 35%
+                ),
+                var(--background);
+
+            color: var(--text);
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           LOGIN SCREEN
+        ========================================================= */
+
+        .login-screen {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border: 1px solid rgba(229, 231, 235, 0.9);
+
+            border-radius: 22px;
+
+            padding: 42px;
+
+            box-shadow:
+                0 25px 60px rgba(15, 23, 42, 0.10),
+                0 8px 20px rgba(15, 23, 42, 0.05);
+
+            backdrop-filter: blur(12px);
+        }
+
+        .brand {
+            text-align: center;
+
+            margin-bottom: 32px;
+        }
+
+        .brand-icon {
+            width: 66px;
+            height: 66px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            font-size: 29px;
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .brand h1 {
+            font-size: 25px;
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .brand p {
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           FORM
+        ========================================================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: var(--text-secondary);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #9ca3af;
+
+            font-size: 17px;
+
+            pointer-events: none;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 50px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 11px;
+
+            padding: 0 15px 0 44px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: var(--text);
+
+            background: #ffffff;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.10);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+
+        /* =========================================================
+           LOGIN BUTTON
+        ========================================================= */
+
+        .login-button {
+            width: 100%;
+            height: 50px;
+
+            margin-top: 6px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 22px rgba(37, 99, 235, 0.25);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            cursor: not-allowed;
+
+            opacity: 0.65;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================================
+           LOGIN ERROR
+        ========================================================= */
+
+        .login-error {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px 14px;
+
+            border-radius: 9px;
+
+            background: var(--danger-bg);
+
+            border: 1px solid var(--danger-border);
+
+            color: var(--danger);
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .login-footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+        }
+
+
+        /* =========================================================
+           MAIN APPLICATION
+        ========================================================= */
+
+        .app {
+            display: none;
+
+            min-height: 100vh;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            height: 72px;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 40px;
+
+            backdrop-filter: blur(12px);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .nav-brand-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            font-size: 18px;
+        }
+
+        .nav-brand-text h2 {
+            font-size: 16px;
+
+            font-weight: 700;
+        }
+
+        .nav-brand-text p {
+            font-size: 11px;
+
+            color: var(--muted);
+
+            margin-top: 2px;
+        }
+
+
+        /* =========================================================
+           LOGOUT
+        ========================================================= */
+
+        .logout-button {
+            border: 1px solid var(--border);
+
+            background: white;
+
+            padding: 9px 15px;
+
+            border-radius: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+        .logout-button:hover {
+            background: #f9fafb;
+
+            border-color: #d1d5db;
+        }
+
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .main-container {
+            max-width: 1050px;
+
+            margin: 0 auto;
+
+            padding: 55px 24px 70px;
+        }
+
+        .page-heading {
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+        .page-heading .badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 7px 12px;
+
+            border-radius: 999px;
+
+            background: #eff6ff;
+
+            border: 1px solid #dbeafe;
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 16px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            background: #22c55e;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 0 4px rgba(34, 197, 94, 0.10);
+        }
+
+        .page-heading h1 {
+            font-size: 34px;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 12px;
+        }
+
+        .page-heading p {
+            max-width: 600px;
+
+            margin: 0 auto;
+
+            color: var(--muted);
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           EMAIL CARD
+        ========================================================= */
+
+        .email-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 20px 45px rgba(15, 23, 42, 0.07);
+        }
+
+        .card-header {
+            margin-bottom: 28px;
+        }
+
+        .card-header h2 {
+            font-size: 19px;
+
+            margin-bottom: 7px;
+        }
+
+        .card-header p {
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 22px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .field-hint {
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            color: #9ca3af;
+        }
+
+        .company-optional {
+            color: var(--primary);
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================================
+           SEND SECTION
+        ========================================================= */
+
+        .send-section {
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #eeeeee;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .attachment-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .attachment-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+
+            font-size: 17px;
+        }
+
+        .attachment-text strong {
+            display: block;
+
+            font-size: 13px;
+
+            color: var(--text-secondary);
+        }
+
+        .attachment-text span {
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 11px;
+
+            color: #9ca3af;
+        }
+
+
+        /* =========================================================
+           SEND BUTTON
+        ========================================================= */
+
+        .send-button {
+            min-width: 170px;
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            transition: all 0.2s ease;
+        }
+
+        .send-button:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 22px rgba(37, 99, 235, 0.25);
+        }
+
+        .send-button:disabled {
+            cursor: not-allowed;
+
+            opacity: 0.65;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================================
+           SPINNER
+        ========================================================= */
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+
+            border: 2px solid rgba(255, 255, 255, 0.35);
+
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           NOTIFICATIONS
+        ========================================================= */
+
+        .notification {
+            display: none;
+
+            margin-top: 22px;
+
+            padding: 14px 16px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .notification.success {
+            display: block;
+
+            background: var(--success-bg);
+
+            border: 1px solid var(--success-border);
+
+            color: var(--success);
+        }
+
+        .notification.error {
+            display: block;
+
+            background: var(--danger-bg);
+
+            border: 1px solid var(--danger-border);
+
+            color: var(--danger);
+        }
+
+
+        /* =========================================================
+           INFO CARDS
+        ========================================================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-top: 25px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.8);
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            padding: 20px;
+        }
+
+        .info-icon {
+            font-size: 20px;
+
+            margin-bottom: 13px;
+        }
+
+        .info-card h3 {
+            font-size: 13px;
+
+            margin-bottom: 6px;
+        }
+
+        .info-card p {
+            font-size: 11px;
+
+            line-height: 1.6;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .nav-brand-text {
+                display: none;
+            }
+
+            .main-container {
+                padding: 35px 16px 50px;
+            }
+
+            .page-heading h1 {
+                font-size: 27px;
+            }
+
+            .email-card {
+                padding: 24px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .send-section {
+                flex-direction: column;
+
+                align-items: stretch;
+            }
+
+            .send-button {
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .login-card {
+                padding: 30px 22px;
+            }
+
+            .brand h1 {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         LOGIN SCREEN
+    ========================================================== -->
+
+    <section
+        id="loginScreen"
+        class="login-screen"
+    >
+
+        <div class="login-card">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    ✉
+                </div>
+
+                <h1>
+                    Mail Automation
+                </h1>
+
+                <p>
+                    Sign in to access your recruiter outreach
+                    automation workspace.
+                </p>
+
+            </div>
+
+
+            <form id="loginForm">
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label
+                        for="username"
+                        class="form-label"
+                    >
+                        Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="username"
+                            class="form-input"
+                            placeholder="Enter username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label
+                        for="password"
+                        class="form-label"
+                    >
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="form-input"
+                            placeholder="Enter password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Sign In
+                </button>
+
+
+                <!-- LOGIN ERROR -->
+
+                <div
+                    id="loginError"
+                    class="login-error"
+                >
+                </div>
+
+            </form>
+
+
+            <div class="login-footer">
+                Private recruiter outreach workspace
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         MAIN APPLICATION
+    ========================================================== -->
+
+    <section
+        id="app"
+        class="app"
+    >
+
+
+        <!-- =====================================================
+             NAVBAR
+        ====================================================== -->
+
+        <nav class="navbar">
+
+            <div class="nav-brand">
+
+                <div class="nav-brand-icon">
+                    ✉
+                </div>
+
+                <div class="nav-brand-text">
+
+                    <h2>
+                        Mail Automation
+                    </h2>
+
+                    <p>
+                        Recruiter Outreach
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </nav>
+
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="main-container">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div class="badge">
+
+                    <span class="status-dot"></span>
+
+                    Ready to send
+
+                </div>
+
+                <h1>
+                    Recruiter Outreach
+                </h1>
+
+                <p>
+                    Send a professional job inquiry directly to
+                    recruiters with your resume attached.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EMAIL CARD
+            ================================================== -->
+
+            <div class="email-card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Send an Email
+                    </h2>
+
+                    <p>
+                        Enter the recruiter details below.
+                        Company name is optional.
+                    </p>
+
+                </div>
+
+
+                <form id="emailForm">
+
+                    <div class="form-grid">
+
+
+                        <!-- RECEIVER EMAIL -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                for="receiverEmail"
+                                class="form-label"
+                            >
+                                Recruiter Email
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    @
+                                </span>
+
+                                <input
+                                    type="email"
+                                    id="receiverEmail"
+                                    class="form-input"
+                                    placeholder="recruiter@company.com"
+                                    autocomplete="email"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="field-hint">
+                                Enter the recruiter's email address.
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- COMPANY NAME -->
+
+                        <div class="form-group full-width">
+
+                            <label
+                                for="companyName"
+                                class="form-label"
+                            >
+
+                                Company Name
+
+                                <span class="company-optional">
+                                    (Optional)
+                                </span>
+
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <span class="input-icon">
+                                    🏢
+                                </span>
+
+                                <input
+                                    type="text"
+                                    id="companyName"
+                                    class="form-input"
+                                    placeholder="e.g. Microsoft"
+                                    autocomplete="organization"
+                                >
+
+                            </div>
+
+                            <div class="field-hint">
+                                If provided, the email will be
+                                personalized for the company.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SEND SECTION -->
+
+                    <div class="send-section">
+
+
+                        <!-- ATTACHMENT -->
+
+                        <div class="attachment-info">
+
+                            <div class="attachment-icon">
+                                📎
+                            </div>
+
+                            <div class="attachment-text">
+
+                                <strong>
+                                    Nitesh_Kumar_Resume.pdf
+                                </strong>
+
+                                <span>
+                                    Automatically attached
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SEND BUTTON -->
+
+                        <button
+                            type="submit"
+                            id="sendButton"
+                            class="send-button"
+                        >
+
+                            <span id="sendButtonText">
+                                Send Email
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- NOTIFICATION -->
+
+                    <div
+                        id="notification"
+                        class="notification"
+                    >
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INFORMATION CARDS
+            ================================================== -->
+
+            <div class="info-grid">
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Personalized
+                    </h3>
+
+                    <p>
+                        Providing a company name allows the backend
+                        to generate a company-specific message.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        📎
+                    </div>
+
+                    <h3>
+                        Resume Attached
+                    </h3>
+
+                    <p>
+                        Your Resume.pdf is automatically attached
+                        by the Spring Boot mail service.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Fast Delivery
+                    </h3>
+
+                    <p>
+                        Your request goes directly to the backend
+                        mail service for delivery.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+
+        /* ========================================================
+           DOM ELEMENTS
+        ======================================================== */
+
+        const loginScreen =
+            document.getElementById("loginScreen");
+
+        const app =
+            document.getElementById("app");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginButton =
+            document.getElementById("loginButton");
+
+        const loginError =
+            document.getElementById("loginError");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const emailForm =
+            document.getElementById("emailForm");
+
+        const receiverEmail =
+            document.getElementById("receiverEmail");
+
+        const companyName =
+            document.getElementById("companyName");
+
+        const sendButton =
+            document.getElementById("sendButton");
+
+        const sendButtonText =
+            document.getElementById("sendButtonText");
+
+        const notification =
+            document.getElementById("notification");
+
+
+        /* ========================================================
+           LOGIN
+           
+           IMPORTANT:
+           
+           There are NO valid credentials stored here.
+           
+           The entered credentials are sent to:
+           
+               POST /auth/login
+           
+           Spring Boot decides whether they are correct.
+        ======================================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideLoginError();
+
+
+                const username =
+                    document
+                        .getElementById("username")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                if (!username || !password) {
+
+                    showLoginError(
+                        "Username and password are required."
+                    );
+
+                    return;
+                }
+
+
+                /* Disable login button */
+
+                loginButton.disabled = true;
+
+                loginButton.textContent =
+                    "Signing in...";
+
+
+                try {
+
+                    /*
+                     * Send credentials to Spring Boot.
+                     *
+                     * The correct credentials are stored
+                     * on the backend through environment
+                     * variables.
+                     */
+
+                    const response =
+                        await fetch(
+                            "/auth/login",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    username: username,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    const message =
+                        await response.text();
+
+
+                    /*
+                     * Login successful
+                     */
+
+                    if (response.ok) {
+
+                        /*
+                         * Clear login credentials from
+                         * the input fields immediately.
+                         */
+
+                        document
+                            .getElementById("username")
+                            .value = "";
+
+                        document
+                            .getElementById("password")
+                            .value = "";
+
+
+                        /*
+                         * Hide login screen.
+                         */
+
+                        loginScreen.style.display =
+                            "none";
+
+
+                        /*
+                         * Show application.
+                         */
+
+                        app.style.display =
+                            "block";
+
+
+                        /*
+                         * Focus recruiter email field.
+                         */
+
+                        setTimeout(
+                            function () {
+
+                                receiverEmail.focus();
+
+                            },
+                            100
+                        );
+
+
+                    } else if (response.status === 401) {
+
+                        showLoginError(
+                            "Invalid username or password."
+                        );
+
+
+                        document
+                            .getElementById("password")
+                            .value = "";
+
+
+                    } else {
+
+                        showLoginError(
+                            message ||
+                            "Unable to authenticate. Please try again."
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login request failed:",
+                        error
+                    );
+
+
+                    showLoginError(
+                        "Unable to connect to the server. " +
+                        "Please make sure the Spring Boot application is running."
+                    );
+
+                } finally {
+
+                    loginButton.disabled = false;
+
+                    loginButton.textContent =
+                        "Sign In";
+                }
+
+            }
+        );
+
+
+        /* ========================================================
+           LOGOUT
+        ======================================================== */
+
+        logoutButton.addEventListener(
+            "click",
+            function () {
+
+                /*
+                 * Hide application.
+                 */
+
+                app.style.display =
+                    "none";
+
+
+                /*
+                 * Show login screen.
+                 */
+
+                loginScreen.style.display =
+                    "flex";
+
+
+                /*
+                 * Clear all fields.
+                 */
+
+                loginForm.reset();
+
+                emailForm.reset();
+
+
+                /*
+                 * Clear notifications.
+                 */
+
+                hideNotification();
+
+                hideLoginError();
+
+
+                /*
+                 * Focus username.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        document
+                            .getElementById("username")
+                            .focus();
+
+                    },
+                    100
+                );
+
+            }
+        );
+
+
+        /* ========================================================
+           EMAIL FORM
+        ======================================================== */
+
+        emailForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideNotification();
+
+
+                const email =
+                    receiverEmail.value.trim();
+
+                const company =
+                    companyName.value.trim();
+
+
+                /*
+                 * Validate email
+                 */
+
+                if (!email) {
+
+                    showNotification(
+                        "Please enter the recruiter's email address.",
+                        "error"
+                    );
+
+                    receiverEmail.focus();
+
+                    return;
+                }
+
+
+                /*
+                 * Browser email validation
+                 */
+
+                if (!receiverEmail.checkValidity()) {
+
+                    showNotification(
+                        "Please enter a valid recruiter email address.",
+                        "error"
+                    );
+
+                    receiverEmail.focus();
+
+                    return;
+                }
+
+
+                /*
+                 * Disable send button
+                 */
+
+                sendButton.disabled = true;
+
+                sendButtonText.innerHTML =
+                    '<span class="spinner"></span> Sending...';
+
+
+                try {
+
+                    /*
+                     * Send request to Spring Boot.
+                     *
+                     * If you later add Spring Security
+                     * session authentication, the browser
+                     * will automatically send the session
+                     * cookie with this same-origin request.
+                     */
+
+                    const response =
+                        await fetch(
+                            "/api/email/send",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    receiverEmail: email,
+                                    companyName: company
+                                })
+                            }
+                        );
+
+
+                    /*
+                     * Read backend response
+                     */
+
+                    const message =
+                        await response.text();
+
+
+                    /*
+                     * Successful email
+                     */
+
+                    if (response.ok) {
+
+                        showNotification(
+                            message ||
+                            "Email sent successfully.",
+                            "success"
+                        );
+
+
+                        /*
+                         * Clear form after
+                         * successful email.
+                         */
+
+                        emailForm.reset();
+
+
+                    } else if (response.status === 401) {
+
+                        /*
+                         * This will become useful once
+                         * /api/email/send is protected
+                         * by Spring Security/session.
+                         */
+
+                        showNotification(
+                            "Your login session has expired. Please login again.",
+                            "error"
+                        );
+
+
+                        logout();
+
+
+                    } else if (response.status === 503) {
+
+                        showNotification(
+                            message ||
+                            "Email service is currently unavailable. Please try again later.",
+                            "error"
+                        );
+
+
+                    } else {
+
+                        showNotification(
+                            message ||
+                            "Unable to send the email.",
+                            "error"
+                        );
+                    }
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Email request failed:",
+                        error
+                    );
+
+
+                    showNotification(
+                        "Unable to connect to the server. " +
+                        "Please make sure the Spring Boot application is running.",
+                        "error"
+                    );
+
+
+                } finally {
+
+                    /*
+                     * Re-enable button
+                     */
+
+                    sendButton.disabled = false;
+
+                    sendButtonText.textContent =
+                        "Send Email";
+                }
+
+            }
+        );
+
+
+        /* ========================================================
+           LOGIN ERROR
+        ======================================================== */
+
+        function showLoginError(message) {
+
+            loginError.textContent =
+                message;
+
+            loginError.style.display =
+                "block";
+        }
+
+
+        function hideLoginError() {
+
+            loginError.textContent =
+                "";
+
+            loginError.style.display =
+                "none";
+        }
+
+
+        /* ========================================================
+           NOTIFICATIONS
+        ======================================================== */
+
+        function showNotification(
+            message,
+            type
+        ) {
+
+            notification.textContent =
+                message;
+
+            notification.className =
+                "notification " + type;
+        }
+
+
+        function hideNotification() {
+
+            notification.textContent =
+                "";
+
+            notification.className =
+                "notification";
+        }
+
+
+        /* ========================================================
+           LOGOUT HELPER
+        ======================================================== */
+
+        function logout() {
+
+            app.style.display =
+                "none";
+
+            loginScreen.style.display =
+                "flex";
+
+            loginForm.reset();
+
+            emailForm.reset();
+
+            hideNotification();
+
+            hideLoginError();
+
+        }
+
+    </script>
+
+</body>
+
+</html>
