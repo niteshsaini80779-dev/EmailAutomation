@@ -15,7 +15,6 @@ import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/api/email")
-@CrossOrigin(origins = "http://localhost:5173")
 public class MailController {
 
     private final EmailService emailService;
